@@ -6,14 +6,14 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { Input } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
 
 const RegisterScreen = () => {
   const [input, setInput] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation ();
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -66,13 +66,15 @@ const RegisterScreen = () => {
           />
         </View>
         <Pressable
-        disabled={!input && !password}
-        onPress={()=> navigation.navigate("Plans",{
-          email:input,
-          password:password,
-        })}
+          disabled={!input && !password}
+          onPress={() =>
+            navigation.navigate("Plans", {
+              email: input,
+              password: password,
+            })
+          }
           style={
-            password.length > 4
+            password.length > 5
               ? {
                   backgroundColor: "red",
                   width: 300,
@@ -102,10 +104,9 @@ const RegisterScreen = () => {
               color: "white",
             }}
           >
-          Register
+            Register
           </Text>
         </Pressable>
-        
       </KeyboardAvoidingView>
     </View>
   );

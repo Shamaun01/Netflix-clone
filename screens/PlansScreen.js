@@ -11,10 +11,16 @@ import { Feather } from "@expo/vector-icons";
 import { Fontisto, Entypo } from "@expo/vector-icons";
 import Plans from "../data/Plans";
 import { useStripe } from "@stripe/stripe-react-native";
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useRoute } from "@react-navigation/native";
 
 
 const PlansScreen = () => {
   const [selected, setSelected] = useState([]);
+  const route = useRoute();
+  const email =route.params.email;
+  const password = route.params.password;
   const [price, setPrice] = useState();
   console.log(selected);
   console.log(price);
@@ -36,7 +42,7 @@ const PlansScreen = () => {
     const clientSecret = data.clientSecret;
     const initSheet = await stripe.initPaymentSheet({
       paymentIntentClientSecret: clientSecret,
-      merchantDisplayName: 'Merchant Name',
+      merchantDisplayName: 'Merchant Name ',
     });
     if (initSheet.error) return Alert.alert(initSheet.error.message);
     const presentSheet = await stripe.presentPaymentSheet({
